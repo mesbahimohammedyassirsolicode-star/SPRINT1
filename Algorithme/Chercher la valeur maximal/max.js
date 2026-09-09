@@ -1,5 +1,5 @@
 let numbers=[30, 20, 40, 10];
-let max = 0;
+let max =numbers[0];
 
 for (let i = 0; i < numbers.length; i++) {
     console.log(`the number in the table is ${numbers[i]}`);
