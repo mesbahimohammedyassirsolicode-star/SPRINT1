@@ -11,6 +11,5 @@ nom,Nom de famille de l'auteur,Texte,Texte,100,Oui,Non
 prenom,Prenom de l'auteur,Texte,Texte,100,Oui,Non
 photo_auteur,Photo de profil de l'auteur,Fichier,Image (jpg/png),,Non,Non
 bio_auteur,Presentation / parcours de l'auteur affiche sur la page  pr,Texte,Texte long,1000,Non,Non
-competences,"Liste des competences de l'auteur (Design, Frontend, Backend, Outils)",Texte,Liste de texte,,Non,Non
 email,Adresse email de connexion l'espace administrateur,Texte,Email,255,Oui,Non
 mot_de_passe,Mot de passe de connexion l'espace administrateur,Texte,Mot de passe (masquee),255,Oui,Non
