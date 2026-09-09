@@ -4,13 +4,12 @@ extrait,Resume court affiche sous le titre dans les listes d'articles,Texte,500,
 contenu,"Contenu complet de l'article (texte, images, citations)",Texte,,Oui,Non
 image_couverture,Image de couverture de l'article,Fichier,,Oui,Non
 date_publication,Date de publication de l'article,Date,,Oui,Non
-duree_lecture,Temps de lecture estim�����,Nombre,,Non,Oui
+duree_lecture,Temps de lecture estim,Nombre,,Non,Oui
 nom_categorie,Nom de la categorie de l'article,Texte,100,Oui,Non
 description_categorie,Description de la categorie,Texte,500,Non,Non
 nom,Nom de famille de l'auteur,Texte,100,Oui,Non
 prenom,Prenom de l'auteur,Texte,100,Oui,Non
 photo_auteur,Photo de profil de l'auteur,Fichier,,Non,Non
 bio_auteur,Presentation / parcours de l'auteur affiche sur la page  pr,Texte,1000,Non,Non
-competences,"Liste des competences de l'auteur (Design, Frontend, Backend, Outils)",Texte,,Non,Non
 email,Adresse email de connexion l'espace administrateur,Texte,255,Oui,Non
 mot_de_passe,Mot de passe de connexion l'espace administrateur,Texte,255,Oui,Non
