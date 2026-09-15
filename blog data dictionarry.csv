@@ -1,0 +1,21 @@
+interface,Nom,Signification,type,Obligatoire,Calculee
+Article,titre_article,Titre de l'article,text,Oui,Non
+Article,contenu,"Contenu complet de l'article (texte, images, citations)",text,Oui,Non
+Article,image_couverture,Image de couverture de l'article,text,Oui,Non
+Article,date_publication,Date de publication de l'article,date,Oui,Non
+Article,temps estimant,Temps de lecture estim,int,Non,Oui
+Article,status article,status d article,enum,Oui,Non
+Article,Id_article ,un identifiant pour chaque article,int,Oui,Non
+Category,nom_categorie,Nom de la categorie de l'article,text,Oui,Non
+Category,icon_catefory,icon de category,text,Non,Non
+Category,couleur_categorie,couleur de la category,text,Non,Non
+Category,descreption_category,une descreption d une category,text,Non,Non
+Category,Id_category,un identifiant pour chaque category,int,Oui,Non
+user,nom auteur,Nom de famille de l'auteur,text,Oui,Non
+user,prenom auteur,Prenom de l'auteur,text,Oui,Non
+user,photo_auteur,Photo de profil de l'auteur,text,Non,Non
+user,bio_auteur,Presentation / parcours de l'auteur affiche sur la page  pr,text,Non,Non
+user,email ,Adresse email de connexion l'espace administrateur,text,Oui,Non
+user,mot_de_passe admin,Mot de passe de connexion l'espace administrateur,text,Oui,Non
+user,user creation account ,date de creation de user acc,date,Oui,Non
+user,Id_user,un identifiant pour chaque user,int,Oui,Non
