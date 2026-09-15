@@ -1,0 +1,41 @@
+Table,Nom de la donnée,Signification,Type,Format,Taille,Obligatoire,Calculée,Clé
+Chef,id_chef,Identifiant unique du chef,Numérique,INT,11,Oui,Non,Clé Primaire
+Chef,nom,Nom complet du chef,Alphanumérique,VARCHAR,100,Oui,Non,—
+Chef,email,Adresse email du chef (unique),Alphanumérique,VARCHAR,150,Oui,Non,Unique
+Chef,mot_de_passe,Mot de passe du compte (haché),Alphanumérique,VARCHAR,255,Oui,Non,—
+Chef,photo,Photo de profil du chef,Alphanumérique,VARCHAR,255,Non,Non,—
+Chef,date_creation,Date de création du compte,Date/Heure,DATETIME,—,Oui,Non,—
+Recipe,id_recipe,Identifiant unique de la recette,Numérique,INT,11,Oui,Non,Clé Primaire
+Recipe,id_chef,Chef qui a créé la recette,Numérique,INT,11,Oui,Non,Clé Étrangère (Chef)
+Recipe,id_cuisine,Cuisine à laquelle appartient la recette,Numérique,INT,11,Oui,Non,Clé Étrangère (Cuisine)
+Recipe,titre,Nom de la recette,Alphanumérique,VARCHAR,150,Oui,Non,—
+Recipe,description,Description de la recette,Texte,TEXT,—,Oui,Non,—
+Recipe,image,Image de la recette,Alphanumérique,VARCHAR,255,Non,Non,—
+Recipe,ingredients,Liste des ingrédients nécessaires,Texte,TEXT,—,Oui,Non,—
+Recipe,instructions,Étapes de préparation,Texte,TEXT,—,Oui,Non,—
+Recipe,temps_preparation,Temps nécessaire pour préparer la recette (en minutes),Numérique,INT,11,Oui,Non,—
+Recipe,difficulte,"Niveau de difficulté de la recette",Alphanumérique,"ENUM('Facile','Moyenne','Difficile')",—,Oui,Non,—
+Recipe,date_creation,Date de création de la recette,Date/Heure,DATETIME,—,Oui,Non,—
+Cuisine,id_cuisine,Identifiant unique de la cuisine,Numérique,INT,11,Oui,Non,Clé Primaire
+Cuisine,nom,Nom de la cuisine,Alphanumérique,VARCHAR,100,Oui,Non,—
+Cuisine,description,Description de la cuisine,Texte,TEXT,—,Non,Non,—
+Cuisine,photo,Image représentant la cuisine,Alphanumérique,VARCHAR,255,Non,Non,—
+Category,id_category,Identifiant unique de la catégorie,Numérique,INT,11,Oui,Non,Clé Primaire
+Category,nom,Nom de la catégorie,Alphanumérique,VARCHAR,100,Oui,Non,—
+Category,description,Description de la catégorie,Texte,TEXT,—,Non,Non,—
+Favorite,id_favorite,Identifiant unique du favori,Numérique,INT,11,Oui,Non,Clé Primaire
+Favorite,id_chef,Chef qui a ajouté la recette aux favoris,Numérique,INT,11,Oui,Non,Clé Étrangère (Chef)
+Favorite,id_recipe,Recette ajoutée aux favoris,Numérique,INT,11,Oui,Non,Clé Étrangère (Recipe)
+Favorite,date_ajout,Date d'ajout aux favoris,Date/Heure,DATETIME,—,Oui,Non,—
+Comment,id_comment,Identifiant unique du commentaire,Numérique,INT,11,Oui,Non,Clé Primaire
+Comment,id_chef,Chef qui a écrit le commentaire,Numérique,INT,11,Oui,Non,Clé Étrangère (Chef)
+Comment,id_recipe,Recette commentée,Numérique,INT,11,Oui,Non,Clé Étrangère (Recipe)
+Comment,contenu,Contenu du commentaire,Texte,TEXT,—,Oui,Non,—
+Comment,date_creation,Date de création du commentaire,Date/Heure,DATETIME,—,Oui,Non,—
+Rating,id_rating,Identifiant unique du rating,Numérique,INT,11,Oui,Non,Clé Primaire
+Rating,id_chef,Chef qui a donné la note,Numérique,INT,11,Oui,Non,Clé Étrangère (Chef)
+Rating,id_recipe,Recette évaluée,Numérique,INT,11,Oui,Non,Clé Étrangère (Recipe)
+Rating,note,Note attribuée à la recette (1 à 5),Numérique,TINYINT,1,Oui,Non,—
+Rating,date_creation,Date de création de l'évaluation,Date/Heure,DATETIME,—,Oui,Non,—
+Recipe_Category,id_recipe,Identifiant de la recette,Numérique,INT,11,Oui,Non,Clé Primaire composée / Clé Étrangère (Recipe)
+Recipe_Category,id_category,Identifiant de la catégorie,Numérique,INT,11,Oui,Non,Clé Primaire composée / Clé Étrangère (Category)

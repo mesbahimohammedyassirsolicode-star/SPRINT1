@@ -1,0 +1,116 @@
+@startuml MCD_Cooking_App
+
+title MCD — Modèle Conceptuel de Données\nApplication de Cuisine (Cooking App)
+
+skinparam {
+    BackgroundColor white
+    RoundCorner 10
+    ArrowColor #2C3E50
+    EntityBackgroundColor #FEF9E7
+    EntityBorderColor #F39C12
+    EntityFontColor #2C3E50
+    NoteBackgroundColor #E8F8F5
+    NoteBorderColor #1ABC9C
+}
+
+' =====================================================
+' ENTITES
+' =====================================================
+
+entity "Chef" as Chef {
+    * **id_chef** : INTEGER
+    --
+    nom : VARCHAR(100)
+    email : VARCHAR(150)
+    mot_de_passe : VARCHAR(255)
+    photo : VARCHAR(255)
+    date_creation : DATETIME
+}
+
+entity "Recipe" as Recipe {
+    * **id_recipe** : INTEGER
+    --
+    titre : VARCHAR(150)
+    description : TEXT
+    image : VARCHAR(255)
+    ingredients : TEXT
+    instructions : TEXT
+    temps_preparation : INTEGER
+    difficulte : ENUM(Facile, Moyenne, Difficile)
+    date_creation : DATETIME
+}
+
+entity "Cuisine" as Cuisine {
+    * **id_cuisine** : INTEGER
+    --
+    nom : VARCHAR(100)
+    description : TEXT
+    photo : VARCHAR(255)
+}
+
+entity "Category" as Category {
+    * **id_category** : INTEGER
+    --
+    nom : VARCHAR(100)
+    description : TEXT
+}
+
+entity "Favorite" as Favorite {
+    * **id_favorite** : INTEGER
+    --
+    date_ajout : DATETIME
+}
+
+entity "Comment" as Comment {
+    * **id_comment** : INTEGER
+    --
+    contenu : TEXT
+    date_creation : DATETIME
+}
+
+entity "Rating" as Rating {
+    * **id_rating** : INTEGER
+    --
+    note : TINYINT(1)
+    date_creation : DATETIME
+}
+
+' =====================================================
+' ASSOCIATIONS & CARDINALITES
+' =====================================================
+
+Chef ||--o{ Recipe : "publie"
+
+Cuisine ||--o{ Recipe : "regroupe"
+
+Recipe }o--o{ Category : "appartient à"
+
+Chef ||--o{ Favorite : "ajoute"
+Recipe ||--o{ Favorite : "est ajoutée en"
+
+Chef ||--o{ Comment : "écrit"
+Recipe ||--o{ Comment : "reçoit"
+
+Chef ||--o{ Rating : "donne"
+Recipe ||--o{ Rating : "reçoit"
+
+note right of Favorite
+  **Contrainte d'unicité**
+  - couple (id_chef, id_recipe) unique
+  - un chef ne peut ajouter la même
+    recette qu'une seule fois en favori
+end note
+
+note right of Rating
+  **Contrainte d'unicité**
+  - couple (id_chef, id_recipe) unique
+  - une seule note par chef et par recette
+end note
+
+note right of Recipe
+  **difficulte** : valeurs possibles
+  Facile / Moyenne / Difficile
+  **temps_preparation** exprimé en minutes
+end note
+
+@enduml
