@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#f4d06f"/>
+  <circle cx="400" cy="250" r="185" fill="#d94f4f" stroke="#f7e2a5" stroke-width="34"/>
+  <circle cx="330" cy="180" r="24" fill="#8b2635"/>
+  <circle cx="465" cy="185" r="24" fill="#8b2635"/>
+  <circle cx="430" cy="320" r="24" fill="#8b2635"/>
+  <circle cx="300" cy="300" r="24" fill="#8b2635"/>
+  <text x="400" y="465" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" fill="#3b2f2f">Pizza</text>
+</svg>
