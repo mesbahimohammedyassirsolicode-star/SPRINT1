@@ -1,0 +1,54 @@
+﻿Table,Nom de la donnée,Signification,Type logique,Format / Taille (SQL),Contrainte,Obligatoire,Nature,Observations
+Client,id_client,Identifiant unique du client,Numérique,INT AUTO_INCREMENT,Clé primaire (PK),Oui,Élémentaire,Généré automatiquement par le SGBD
+Client,nom,Nom de famille du client,Alphabétique,VARCHAR(50),NOT NULL,Oui,Élémentaire,
+Client,prenom,Prénom du client,Alphabétique,VARCHAR(50),NOT NULL,Oui,Élémentaire,
+Client,email,Adresse email du client (identifiant de connexion),Alphanumérique,VARCHAR(100),"UNIQUE, NOT NULL",Oui,Élémentaire,Doit contenir le caractère @ (contrôle de saisie)
+Client,mot_de_passe,Mot de passe du compte client,Alphanumérique,VARCHAR(255),NOT NULL,Oui,Élémentaire,"Stocké sous forme hachée (ex. bcrypt), jamais en clair"
+Client,telephone,Numéro de téléphone du client,Alphanumérique,VARCHAR(20),NOT NULL,Oui,Élémentaire,Format national ou international (+212...)
+Client,adresse,Adresse postale du client,Alphanumérique,VARCHAR(150),-,Non,Élémentaire,
+Client,date_inscription,Date et heure de création du compte,Date/Heure,DATETIME,NOT NULL,Oui,Élémentaire,Valeur par défaut : CURRENT_TIMESTAMP
+Type_hebergement,id_type,Identifiant unique du type d'hébergement,Numérique,INT AUTO_INCREMENT,Clé primaire (PK),Oui,Élémentaire,Généré automatiquement par le SGBD
+Type_hebergement,nom_type,Libellé du type d'hébergement,Alphanumérique,VARCHAR(50),"UNIQUE, NOT NULL",Oui,Élémentaire,"Ex. : Simple, Double, Suite, Familiale"
+Type_hebergement,description,Description du type d'hébergement,Alphanumérique,TEXT,-,Non,Élémentaire,
+Type_hebergement,capacite,Nombre maximum de personnes autorisées,Numérique,INT,CHECK (capacite > 0),Oui,Élémentaire,Sert à contrôler Reservation.nombre_personnes
+Chambre,id_chambre,Identifiant unique de la chambre,Numérique,INT AUTO_INCREMENT,Clé primaire (PK),Oui,Élémentaire,Généré automatiquement par le SGBD
+Chambre,numero,Numéro de la chambre,Alphanumérique,VARCHAR(10),"UNIQUE, NOT NULL",Oui,Élémentaire,Deux chambres ne peuvent pas porter le même numéro
+Chambre,etage,Étage où se situe la chambre,Numérique,INT,CHECK (etage >= 0),Oui,Élémentaire,
+Chambre,prix_nuit,Prix de la chambre par nuit (en DH),Numérique décimal,"DECIMAL(10,2)",CHECK (prix_nuit > 0),Oui,Élémentaire,Sert au calcul de Reservation.montant_total
+Chambre,statut,État d'exploitation de la chambre,Alphanumérique (liste),"ENUM('Disponible','Occupée','Maintenance')",NOT NULL,Oui,Élémentaire,Valeur par défaut : 'Disponible'. La disponibilité réelle sur une période se vérifie dans la table Reservation
+Chambre,description,Description / équipements de la chambre,Alphanumérique,TEXT,-,Non,Élémentaire,
+Chambre,id_type,Référence vers le type d'hébergement,Numérique,INT,Clé étrangère (FK) -> Type_hebergement(id_type),Oui,Élémentaire,"Une chambre appartient à un seul type ; un type concerne plusieurs chambres (1,N)"
+Reservation,id_reservation,Identifiant unique de la réservation,Numérique,INT AUTO_INCREMENT,Clé primaire (PK),Oui,Élémentaire,Généré automatiquement par le SGBD
+Reservation,date_reservation,Date et heure de création de la réservation,Date/Heure,DATETIME,NOT NULL,Oui,Élémentaire,Valeur par défaut : CURRENT_TIMESTAMP
+Reservation,date_arrivee,Date prévue d'arrivée (check-in),Date,DATE,NOT NULL,Oui,Élémentaire,Doit être >= date du jour lors de la saisie
+Reservation,date_depart,Date prévue de départ (check-out),Date,DATE,CHECK (date_depart > date_arrivee),Oui,Élémentaire,
+Reservation,nombre_nuits,Nombre de nuits de la réservation,Numérique,INT,-,Oui,Calculée,#NAME?
+Reservation,nombre_personnes,Nombre de personnes concernées,Numérique,INT,CHECK (nombre_personnes > 0),Oui,Élémentaire,Ne doit pas dépasser Type_hebergement.capacite de la chambre réservée
+Reservation,montant_total,Montant total à payer pour le séjour (en DH),Numérique décimal,"DECIMAL(10,2)",-,Oui,Calculée,#NAME?
+Reservation,statut,État d'avancement de la réservation,Alphanumérique (liste),"ENUM('En attente','Confirmée','Annulée','Terminée')",NOT NULL,Oui,Élémentaire,Valeur par défaut : 'En attente'
+Reservation,id_client,Référence vers le client ayant réservé,Numérique,INT,Clé étrangère (FK) -> Client(id_client),Oui,Élémentaire,"Un client peut effectuer plusieurs réservations (1,N)"
+Reservation,id_chambre,Référence vers la chambre réservée,Numérique,INT,Clé étrangère (FK) -> Chambre(id_chambre),Oui,Élémentaire,"Une chambre peut faire l'objet de plusieurs réservations à des périodes différentes (1,N)"
+Paiement,id_paiement,Identifiant unique du paiement,Numérique,INT AUTO_INCREMENT,Clé primaire (PK),Oui,Élémentaire,
+Paiement,date_paiement,Date et heure du paiement,Date/Heure,DATETIME,NOT NULL,Oui,Élémentaire,Valeur par défaut : CURRENT_TIMESTAMP
+Paiement,montant,Montant payé (en DH),Numérique décimal,"DECIMAL(10,2)",CHECK (montant > 0),Oui,Élémentaire,Le cumul des paiements ne doit pas dépasser Reservation.montant_total
+Paiement,methode,Méthode utilisée pour le paiement,Alphanumérique (liste),"ENUM('Carte','Espèces','Virement')",NOT NULL,Oui,Élémentaire,
+Paiement,statut,État du paiement,Alphanumérique (liste),"ENUM('En attente','Payé','Remboursé','Échoué')",NOT NULL,Oui,Élémentaire,Valeur par défaut : 'En attente'
+Paiement,reference_transaction,Référence de la transaction bancaire,Alphanumérique,VARCHAR(100),UNIQUE,Non,Élémentaire,Renseignée uniquement pour les paiements électroniques
+Paiement,id_reservation,Référence vers la réservation payée,Numérique,INT,Clé étrangère (FK) -> Reservation(id_reservation),Oui,Élémentaire,"Une réservation peut faire l'objet de plusieurs paiements (1,N)"
+Service,id_service,Identifiant unique du service,Numérique,INT AUTO_INCREMENT,Clé primaire (PK),Oui,Élémentaire,
+Service,nom_service,Nom du service proposé par l'hôtel,Alphanumérique,VARCHAR(80),"UNIQUE, NOT NULL",Oui,Élémentaire,"Ex. : Petit-déjeuner, Navette, Spa"
+Service,description,Description du service,Alphanumérique,TEXT,-,Non,Élémentaire,
+Service,prix,Prix unitaire du service (en DH),Numérique décimal,"DECIMAL(10,2)",CHECK (prix >= 0),Oui,Élémentaire,
+Service,disponible,Indique si le service est actuellement proposé,Booléen,BOOLEAN (TRUE / FALSE),NOT NULL,Oui,Élémentaire,Valeur par défaut : TRUE
+Reservation_Service,id_reservation_service,Identifiant unique de la ligne de service,Numérique,INT AUTO_INCREMENT,Clé primaire (PK),Oui,Élémentaire,"Table d'association : relation (N,N) entre Reservation et Service"
+Reservation_Service,quantite,Quantité du service demandée,Numérique,INT,CHECK (quantite > 0),Oui,Élémentaire,Valeur par défaut : 1
+Reservation_Service,prix_unitaire,Prix du service au moment de la réservation (en DH),Numérique décimal,"DECIMAL(10,2)",CHECK (prix_unitaire >= 0),Oui,Élémentaire,Recopié depuis Service.prix pour figer l'historique
+Reservation_Service,sous_total,Montant total pour cette ligne de service (en DH),Numérique décimal,"DECIMAL(10,2)",-,Oui,Calculée,#NAME?
+Reservation_Service,id_reservation,Référence vers la réservation,Numérique,INT,Clé étrangère (FK) -> Reservation(id_reservation),Oui,Élémentaire,"Couple (id_reservation, id_service) unique"
+Reservation_Service,id_service,Référence vers le service,Numérique,INT,Clé étrangère (FK) -> Service(id_service),Oui,Élémentaire,
+Avis,id_avis,Identifiant unique de l'avis,Numérique,INT AUTO_INCREMENT,Clé primaire (PK),Oui,Élémentaire,
+Avis,note,Note donnée par le client,Numérique,INT,CHECK (note BETWEEN 1 AND 5),Oui,Élémentaire,Échelle de 1 à 5
+Avis,commentaire,Commentaire laissé par le client,Alphanumérique,TEXT,-,Non,Élémentaire,
+Avis,date_avis,Date et heure de publication de l'avis,Date/Heure,DATETIME,NOT NULL,Oui,Élémentaire,Valeur par défaut : CURRENT_TIMESTAMP
+Avis,id_client,Référence vers le client auteur de l'avis,Numérique,INT,Clé étrangère (FK) -> Client(id_client),Oui,Élémentaire,Redondant avec Reservation.id_client : à conserver uniquement pour simplifier les requêtes
+Avis,id_reservation,Référence vers la réservation concernée,Numérique,INT,"Clé étrangère (FK) -> Reservation(id_reservation), UNIQUE",Oui,Élémentaire,Un seul avis par réservation ; la réservation doit être 'Terminée'
