@@ -1,0 +1,203 @@
+@startuml MCD_Reservation_Hotels
+
+title MCD — Modèle Conceptuel de Données\nRéservation d'Hôtels
+
+skinparam {
+    BackgroundColor white
+    RoundCorner 10
+    ArrowColor #2C3E50
+    EntityBackgroundColor #FEF9E7
+    EntityBorderColor #F39C12
+    EntityFontColor #2C3E50
+    NoteBackgroundColor #E8F8F5
+    NoteBorderColor #1ABC9C
+}
+
+' =====================================================
+' ENTITES
+' =====================================================
+
+entity "Hotel" as Hotel {
+    * **id_hotel** : INTEGER
+    --
+    nom_hotel : VARCHAR(100)
+    adresse : VARCHAR(200)
+    ville : VARCHAR(50)
+    pays : VARCHAR(50)
+    telephone : VARCHAR(20)
+    email : VARCHAR(100)
+    categorie_etoiles : TINYINT
+    date_ouverture : DATE
+}
+
+entity "Client" as Client {
+    * **id_client** : INTEGER
+    --
+    nom : VARCHAR(50)
+    prenom : VARCHAR(50)
+    email : VARCHAR(100)
+    mot_de_passe : VARCHAR(255)
+    telephone : VARCHAR(20)
+    adresse : VARCHAR(200)
+    ville : VARCHAR(50)
+    pays : VARCHAR(50)
+    cin_passeport : VARCHAR(30)
+    date_naissance : DATE
+    date_inscription : DATETIME
+    statut_fidelite : ENUM(Standard, Silver, Gold, Platinum)
+}
+
+entity "Type_Hebergement" as TypeHebergement {
+    * **id_type** : INTEGER
+    --
+    libelle : VARCHAR(50)
+    description : TEXT
+    capacite_max : TINYINT
+    superficie_m2 : DECIMAL(5,2)
+    prix_base_nuit : DECIMAL(10,2)
+}
+
+entity "Chambre" as Chambre {
+    * **id_chambre** : INTEGER
+    --
+    numero_chambre : VARCHAR(10)
+    etage : TINYINT
+    prix_nuit : DECIMAL(10,2)
+    vue : ENUM(Mer, Jardin, Ville, Piscine, Aucune)
+    fumeur : BOOLEAN
+    statut_chambre : ENUM(Disponible, Occupée, Maintenance, Nettoyage)
+}
+
+entity "Equipement" as Equipement {
+    * **id_equipement** : INTEGER
+    --
+    nom_equipement : VARCHAR(50)
+    description : VARCHAR(200)
+}
+
+entity "Employe" as Employe {
+    * **id_employe** : INTEGER
+    --
+    nom : VARCHAR(50)
+    prenom : VARCHAR(50)
+    poste : VARCHAR(50)
+    telephone : VARCHAR(20)
+    email : VARCHAR(100)
+    date_embauche : DATE
+}
+
+entity "Promotion" as Promotion {
+    * **id_promotion** : INTEGER
+    --
+    code_promo : VARCHAR(30)
+    description : VARCHAR(200)
+    pourcentage_reduction : DECIMAL(5,2)
+    date_debut : DATE
+    date_fin : DATE
+    actif : BOOLEAN
+}
+
+entity "Reservation" as Reservation {
+    * **id_reservation** : INTEGER
+    --
+    date_reservation : DATETIME
+    date_arrivee : DATE
+    date_depart : DATE
+    nb_adultes : TINYINT
+    nb_enfants : TINYINT
+    statut_reservation : ENUM(En attente, Confirmée, Enregistrée, Terminée, Annulée)
+    source_reservation : ENUM(Site web, Téléphone, Agence, Sur place)
+    montant_total : DECIMAL(10,2)
+}
+
+entity "Service" as Service {
+    * **id_service** : INTEGER
+    --
+    nom_service : VARCHAR(50)
+    description : VARCHAR(200)
+    prix_unitaire : DECIMAL(10,2)
+}
+
+entity "Paiement" as Paiement {
+    * **id_paiement** : INTEGER
+    --
+    montant : DECIMAL(10,2)
+    date_paiement : DATETIME
+    mode_paiement : ENUM(Carte bancaire, Espèces, Virement, Chèque, PayPal)
+    statut_paiement : ENUM(En attente, Validé, Refusé, Remboursé)
+    reference_transaction : VARCHAR(100)
+}
+
+entity "Facture" as Facture {
+    * **id_facture** : INTEGER
+    --
+    numero_facture : VARCHAR(30)
+    date_emission : DATE
+    montant_ht : DECIMAL(10,2)
+    taux_tva : DECIMAL(5,2)
+    montant_ttc : DECIMAL(10,2)
+    statut_facture : ENUM(Émise, Payée, Impayée, Annulée)
+}
+
+entity "Annulation" as Annulation {
+    * **id_annulation** : INTEGER
+    --
+    date_annulation : DATETIME
+    motif : VARCHAR(255)
+    montant_rembourse : DECIMAL(10,2)
+}
+
+entity "Avis" as Avis {
+    * **id_avis** : INTEGER
+    --
+    note : TINYINT
+    commentaire : TEXT
+    date_avis : DATETIME
+}
+
+' =====================================================
+' ASSOCIATIONS & CARDINALITES
+' =====================================================
+
+Hotel ||--o{ Chambre : "possède"
+TypeHebergement ||--o{ Chambre : "catégorise"
+Hotel ||--o{ Employe : "emploie"
+
+Chambre }o--o{ Equipement : "est équipée de"
+
+Client ||--o{ Reservation : "effectue"
+Chambre ||--o{ Reservation : "fait l'objet de"
+Employe |o--o{ Reservation : "traite"
+Promotion |o--o{ Reservation : "s'applique à"
+
+Reservation }o--o{ Service : "consomme"
+
+Reservation ||--o{ Paiement : "génère"
+Reservation ||--|| Facture : "donne lieu à"
+Reservation ||--o| Annulation : "peut faire l'objet d'"
+Reservation ||--o| Avis : "peut recevoir"
+Client ||--o{ Avis : "rédige"
+
+note right of Chambre
+  **Contrainte d'unicité**
+  - couple (id_hotel, numero_chambre) unique
+end note
+
+note right of Reservation
+  **Contrainte**
+  - date_depart > date_arrivee
+  - une réservation ne peut avoir
+    qu'une seule facture et qu'une
+    seule annulation
+end note
+
+note right of Avis
+  **Contrainte d'unicité**
+  - un seul avis par réservation
+  - note comprise entre 1 et 5
+end note
+
+note "**Association Reservation ↔ Service**\nporte les attributs :\nquantite, date_utilisation,\nprix_unitaire_applique" as N1
+N1 .. Reservation
+
+@enduml
