@@ -32,11 +32,7 @@ body {
     font-weight: 700;
 }
 
-.button-secondary {
-    color: #5f3d2e;
-    text-decoration: none;
-    font-weight: 600;
-}
+
 
 .form-container {
     max-width: 900px;
@@ -86,12 +82,7 @@ select {
     color: #2d2d2d;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-    outline: 2px solid #d89a6a;
-    border-color: #d89a6a;
-}
+
 
 textarea {
     resize: vertical;

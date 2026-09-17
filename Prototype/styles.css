@@ -37,10 +37,19 @@ body{
     text-decoration: none;
     font-weight: 600;
 }
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
 .recipe-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
     gap: 1.5rem;
 }
 

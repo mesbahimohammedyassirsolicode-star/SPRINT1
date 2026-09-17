@@ -67,7 +67,6 @@ $recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <p><strong>Préparation :</strong> <?php echo $recipe['temps_preparation']; ?> minutes</p>
                                 <p><strong>Difficulté :</strong> <?php echo htmlspecialchars($recipe['difficulte']); ?></p>
                             </div>
-                            <a href="recipe.php?id=<?php echo $recipe['id_recipe']; ?>" class="button button-primary">Voir détails</a>
                         </div>
                     </article>
                 <?php endforeach; ?>
