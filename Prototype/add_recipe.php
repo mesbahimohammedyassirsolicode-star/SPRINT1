@@ -28,11 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $titre = $_POST["titre"];
     $description = $_POST["description"];
-
-    // Add the images folder when only a filename is entered.
-    if ($image !== "" && strpos($image, "images/") !== 0) {
-        $image = "images/" . $image;
-    }
     $ingredients = $_POST["ingredients"];
     $instructions = $_POST["instructions"];
     $temps_preparation = $_POST["temps_preparation"];
