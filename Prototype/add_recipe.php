@@ -41,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         INSERT INTO Recipe (
             titre,
             description,
-            image,
             ingredients,
             instructions,
             temps_preparation,
@@ -53,7 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         VALUES (
             :titre,
             :description,
-            :image,
             :ingredients,
             :instructions,
             :temps_preparation,
@@ -70,7 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->execute([
         ":titre" => $titre,
         ":description" => $description,
-        ":image" => $image,
         ":ingredients" => $ingredients,
         ":instructions" => $instructions,
         ":temps_preparation" => $temps_preparation,
