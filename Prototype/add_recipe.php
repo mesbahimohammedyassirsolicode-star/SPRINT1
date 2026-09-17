@@ -28,7 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $titre = $_POST["titre"];
     $description = $_POST["description"];
-    $image = trim($_POST["image"]);
 
     // Add the images folder when only a filename is entered.
     if ($image !== "" && strpos($image, "images/") !== 0) {
@@ -157,18 +156,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
 
 
-        <!-- Image -->
-
-        <div class="form-group">
-            <label for="image">Image</label>
-
-            <input
-                type="text"
-                id="image"
-                name="image"
-                placeholder="Example: images/pizza.svg or pizza.svg"
-            >
-        </div>
 
 
         <!-- Ingredients -->

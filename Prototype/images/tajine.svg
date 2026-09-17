@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
-  <rect width="800" height="500" fill="#b8d8d8"/>
-  <path d="M190 300 Q400 410 610 300 L570 350 Q400 440 230 350 Z" fill="#8c4a35"/>
-  <path d="M210 290 Q400 340 590 290 Q540 370 400 385 Q260 370 210 290 Z" fill="#d9824b"/>
-  <path d="M400 85 L535 295 Q400 345 265 295 Z" fill="#c9663d" stroke="#7f3f2e" stroke-width="12"/>
-  <circle cx="400" cy="175" r="17" fill="#f4d06f"/>
-  <text x="400" y="465" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" fill="#263238">Tajine</text>
-</svg>
