@@ -1,221 +1,66 @@
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
+body{
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
 
-body {
-    margin: 0;
-    background: #fff7ed;
-    color: #333333;
-    font-family: Arial, sans-serif;
-    line-height: 1.5;
 }
 
 .site-header {
-    background: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.navbar,
-.container,
-.form-container {
-    width: 90%;
-    max-width: 1100px;
-    margin: 0 auto;
+    background: #fff;
+    border-bottom: 1px solid #e5dfd7;
+    padding: 1rem 1.5rem;
 }
 
 .navbar {
-    min-height: 64px;
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    align-items: center;
+    gap: 1rem;
 }
 
 .logo {
-    color: #c2410c;
-    font-size: 22px;
-    font-weight: bold;
+    color: #2f2f2f;
     text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 700;
 }
 
-.nav-link,
-.button {
-    display: inline-block;
-    padding: 10px 16px;
-    border-radius: 5px;
+.nav-link {
+    color: #5f3d2e;
     text-decoration: none;
-    cursor: pointer;
-}
-
-.nav-link,
-.button-primary {
-    background: #ea580c;
-    color: #ffffff;
-}
-
-.nav-link:hover,
-.button-primary:hover {
-    background: #c2410c;
-}
-
-.container {
-    padding: 40px 0;
-}
-
-.page-title {
-    margin: 0 0 8px;
-    color: #1f2937;
-    font-size: 32px;
-}
-
-.page-intro {
-    margin: 0 0 32px;
-    color: #6b7280;
+    font-weight: 600;
 }
 
 .recipe-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
-
-.recipe-card,
-.empty-state,
-.recipe-form {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
 }
 
 .recipe-card {
-    overflow: hidden;
-}
-
-.recipe-card:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.14);
+    border: 1px solid #b1792f;
+    border-radius: 0.5rem;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
 }
 
 .recipe-image {
     width: 100%;
-    height: 190px;
-    display: block;
-    object-fit: cover;
+    height: 220px;
+    object-fit: center;
 }
 
 .recipe-content {
-    padding: 20px;
-}
-
-.recipe-title {
-    margin: 0 0 8px;
-    color: #1f2937;
-    font-size: 21px;
-}
-
-.recipe-description {
-    color: #6b7280;
-}
-
-.recipe-info {
-    margin: 16px 0;
-    font-size: 14px;
-}
-
-.recipe-info p {
-    margin: 5px 0;
-}
-
-.button {
-    border: 0;
-    font-size: 15px;
-}
-
-.button-secondary {
-    margin-right: 8px;
-    color: #374151;
-}
-
-.empty-state {
-    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
     text-align: center;
-}
-
-.form-container {
-    max-width: 700px;
-    padding: 40px 0;
-}
-
-.form-title {
-    margin: 0 0 8px;
-    color: #1f2937;
-    font-size: 32px;
-}
-
-.form-intro {
-    margin: 0 0 24px;
-    color: #6b7280;
-}
-
-.recipe-form {
-    padding: 24px;
-}
-
-.form-group {
-    margin-bottom: 18px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: bold;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #d1d5db;
-    border-radius: 5px;
-    font: inherit;
-}
-
-.form-group textarea {
-    resize: vertical;
-}
-
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-    border-color: #ea580c;
-    outline: none;
-}
-
-.form-actions {
-    margin-top: 24px;
-}
-
-@media (max-width: 800px) {
-    .recipe-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 550px) {
-    .navbar {
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 16px 0;
-    }
-
-    .recipe-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .container,
-    .form-container {
-        padding-top: 28px;
-        padding-bottom: 28px;
-    }
 }

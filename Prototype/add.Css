@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f7f3ee;
+    color: #2d2d2d;
+}
+
+.site-header {
+    background: #fff;
+    border-bottom: 1px solid #e5dfd7;
+    padding: 1rem 1.5rem;
+}
+
+.navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    color: #2f2f2f;
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.button-secondary {
+    color: #5f3d2e;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.form-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1.25rem 3rem;
+}
+
+.form-title {
+    margin-bottom: 0.5rem;
+    font-size: clamp(2rem, 3vw, 2.5rem);
+}
+
+.form-intro {
+    margin-bottom: 1.5rem;
+    color: #5a5a5a;
+}
+
+.recipe-form {
+    background: #fff;
+    border: 1px solid #eadfd2;
+    border-radius: 18px;
+    padding: 2rem;
+    display: grid;
+    gap: 1.25rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+}
+
+.form-group {
+    display: grid;
+    gap: 0.5rem;
+}
+
+label {
+    font-weight: 600;
+    color: #332d2a;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid #d9d0c4;
+    border-radius: 10px;
+    background: #fff;
+    font: inherit;
+    color: #2d2d2d;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid #d89a6a;
+    border-color: #d89a6a;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.button {
+    display: inline-block;
+    padding: 0.8rem 1.2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+

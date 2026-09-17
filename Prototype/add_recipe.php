@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         content="width=device-width, initial-scale=1.0"
     >
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="add.css">
     <title>Cooking App | Ajouter une recette</title>
 
 </head>
